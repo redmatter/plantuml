@@ -8,10 +8,11 @@ ENV LANG en_GB.UTF-8
 
 RUN (\
     set -eux; \
-    apk add --no-cache graphviz wget ca-certificates ttf-dejavu fontconfig ; \
+    apk add --no-cache graphviz wget ca-certificates ttf-dejavu fontconfig make; \
     wget -O ${PLANTUML_JAR} https://github.com/plantuml/plantuml/releases/download/v${PLANTUML_VERSION}/plantuml-${PLANTUML_VERSION}.jar; \
     java -Djava.awt.headless=true -jar ${PLANTUML_JAR} -version; \
     dot -version; \
+    make --version; \
 )
 
 ENTRYPOINT ["java", "-Djava.awt.headless=true", "-jar", "/plantuml.jar"]
